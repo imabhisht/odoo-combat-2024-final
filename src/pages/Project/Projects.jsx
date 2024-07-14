@@ -42,7 +42,7 @@ const people = [
       },
       "imageLinks": {
         "smallThumbnail": null,
-        "thumbnail": null
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/23/Where_the_Crawdads_Sing_%28film%29.jpg"
       },
       "language": "en",
       "previewLink": null,
@@ -117,7 +117,7 @@ const people = [
       },
       "imageLinks": {
         "smallThumbnail": null,
-        "thumbnail": null
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/23/Where_the_Crawdads_Sing_%28film%29.jpg"
       },
       "language": "en",
       "previewLink": null,
@@ -527,7 +527,10 @@ const people = [
 
 export default function Projects({ project }) {
   const navigate = useNavigate();
-
+  
+  const handleDescribeClick = (person) => {
+    navigate('/details', { state: { book: person } });
+  };
   return (
     <div className="px-4 sm:px-6 lg:px-8 mt-10">
       <div className="sm:flex sm:items-center">
@@ -613,7 +616,7 @@ export default function Projects({ project }) {
                   {person.read_count}
                 </td>
                 <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                  <a href="" className="text-indigo-600 hover:text-indigo-900" onClick={() => handleDescribeClick(person)} >
                     Describe<span className="sr-only">, {person.name}</span>
                   </a>
                 </td>

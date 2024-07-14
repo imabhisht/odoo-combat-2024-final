@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, RouterProvider ,createBrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -17,26 +17,43 @@ import UsersList from "./pages/Project/UsersList";
 // Components
 import LoadingSpinner from "./components/Loading";
 import BookForm from "./pages/form/Bookform";
+import BookDetails from "./pages/Project/BookDetails";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DashboardLayout />,
     children: [
-      { path: "/", element: (
-        <ProtectedRoute>
+      {
+        path: "/", element: (
+          // <ProtectedRoute>
           <HomePage />
-       </ProtectedRoute>
-      )},
-      { path: "/books", element: (
-        //<ProtectedRoute>
-          <ProjectPage />
-        //</ProtectedRoute>
-      )},
+          // </ProtectedRoute>
+        )
+      },
       { path: "/users-list", element: (
         <ProtectedRoute>
           <UsersList />
         </ProtectedRoute>
       )},
+      {
+        path: "/books", element: (
+          //<ProtectedRoute>
+          <ProjectPage />
+          //</ProtectedRoute>
+        )
+      },
+      {
+        path: "/details", element: (
+          <BookDetails />
+        )
+      },
+      {
+        path: "/form",
+        element: (
+          <BookForm />
+        )
+      }
+
     ],
   },
   {
@@ -68,12 +85,6 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     )
   },
-  {
-    path:"/form",
-    element: (
-      <BookForm />
-    )
-  }
 ]);
 
 export default () => {
@@ -86,15 +97,15 @@ export default () => {
   //   }, 0);
   // }, []);
 
-  
+
   return (
     <>
-    {loading ? (<LoadingSpinner />) : (
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>)
+      {loading ? (<LoadingSpinner />) : (
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>)
 
-    }
+      }
     </>
   );
 };

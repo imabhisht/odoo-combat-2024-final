@@ -1,12 +1,12 @@
 const { Kafka, logLevel } = require('kafkajs');
 const logger = require('./logger');
 const kafka = new Kafka({
-  brokers: ['obliging-maggot-8816-eu2-kafka.upstash.io:9092'],
+  brokers: ['stirring-glowworm-14525-eu2-kafka.upstash.io:9092'],
   ssl: true,
   sasl: {
       mechanism: 'scram-sha-256',
-      username: 'b2JsaWdpbmctbWFnZ290LTg4MTYk2aO_ihLKTseivRE-UOUbCXe5reRXZNJW5Ac',
-      password: 'NWU0OTdkY2UtZGRhOS00YWVhLTg0NmQtMDQzOTk5ODkyY2E1'
+      username: 'c3RpcnJpbmctZ2xvd3dvcm0tMTQ1MjUkWJdZ3fp4ZbaolYMY44717qiaCz0N5sw',
+      password: 'ZThmZmFiMWEtYzU0Mi00MzQ1LWE5MmMtY2ViNzBjMzljNDc0'
   },
   logLevel: logLevel.ERROR,
 });

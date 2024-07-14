@@ -1,6 +1,53 @@
 const res = require("express/lib/response")
 const { mongodb_client } = require("../../init")
 const uuid = require("uuid")
+const { kafka } = require("../../init")
+
+
+
+const bookOnKafkaProducer = async (book) => {
+    try {
+        const producer = kafka.producer();
+        const run = async () => {
+            await producer.connect();
+          
+            await producer.send({
+                topic: 'document-create',
+                messages: [{
+                    value: book
+                }],
+            });
+          
+            console.log("Message sent successfully");
+            await producer.disconnect();
+          };
+          
+          run().catch(e => console.error('[example/producer] e', e));
+        } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}
+
+module.exports.bookOnKafkaConsumer = async () => {
+    try {
+        const consumer = kafka.consumer({ groupId: 'test-group' });
+        await consumer.connect();
+        await consumer.subscribe({ topic: 'document-create', fromBeginning: true });
+        await consumer.run({
+            eachMessage: async ({ topic, partition, message }) => {
+              console.log("Message received on Kafka: ", {
+                value: message.value.toString(),
+              });
+            },
+          });
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+
+}
+
 
 module.exports.addBook = async(req,res) => {
     try {
@@ -80,10 +127,19 @@ module.exports.addBook = async(req,res) => {
             workspace_id: workspace_id,
         });
 
+
+
         const workspace = await mongodb_client.collection("workspaces_book").insertOne({
             workspace_id: workspace_id,
             book_id: book_id,
         });
+
+
+        const single_book = await mongodb_client.collection("books").findOne({ id: book_id });
+
+        // bookOnKafka(book)
+        await bookOnKafkaProducer(JSON.stringify(single_book))
+
 
         return res.status(200).send(book);
 

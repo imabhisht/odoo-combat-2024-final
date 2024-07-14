@@ -6,7 +6,7 @@ const { verifyAccessToken } = require("./middleware/auth")
 const { firebase_admin, logger } = require("./init");
 const app = express();
 // const { projectCreatorConsumer } = require("./api/ai/consumer.js");
-
+const { bookOnKafkaConsumer } = require("./api/books/controller")
 //Load Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -15,7 +15,7 @@ app.use(cors());
 
 // Start Kafka Consumer
 // projectCreatorConsumer();
-
+bookOnKafkaConsumer();
 app.get("/",async(req,res)=>{
     res.send("Ok")
 })

@@ -15,6 +15,7 @@ module.exports.verifyAccessToken = async (req, res, next) => {
         }
         req.auth = decodedToken;
         req.auth.id = decodedToken.uid;
+        req.auth.workspace = decodedToken.customClaims;
         next();
     } catch (error) {
         console.error(error);

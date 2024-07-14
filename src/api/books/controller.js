@@ -16,10 +16,11 @@ module.exports.addBook = async(req,res) => {
             maturityRating,
         } = req.body;
         const { user_id } = req.auth;
-
+        const x = req.auth.workspace_id
+        const book_id = uuid.v4();
         const book = await mongodb_client.collection("books").insertOne({
             kind: "books#volume",
-            id: uuid.v4(),
+            id: book_id,
             etag: null,
             selfLink: null,
             volumeInfo: {
@@ -75,16 +76,98 @@ module.exports.addBook = async(req,res) => {
                 textSnippet: null
             },
             created_by: user_id,
-            created_at: new Date()
+            created_at: new Date(),
+            workspace_id: workspace_id,
         });
 
         const workspace = await mongodb_client.collection("workspaces_book").insertOne({
-            _id: workspace_id,
-            book_id: book.insertedId
+            workspace_id: workspace_id,
+            book_id: book_id,
         });
 
         return res.status(200).send(book);
 
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+module.exports.getBooks = async(req,res) => {
+    try {
+        const { workspace_id } = req.query;
+        const books = await mongodb_client.collection("books").find({ workspace_id: workspace_id }).toArray();
+        return res.status(200).send(books);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+
+module.exports.getBook = async(req,res) => {
+    try {
+        const { book_id } = req.params;
+        // Update the book read count
+        console.info(book_id)
+        await mongodb_client.collection("books").updateOne({ id: book_id }, { $inc: { read_count: 1 } });
+
+        const book = await mongodb_client.collection("books").findOne({ id: book_id });
+        return res.status(200).send(book);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+
+module.exports.deleteBook = async(req,res) => {
+    try {
+        const { book_id } = req.params;
+        const book = await mongodb_client.collection("books").deleteOne({ id: book_id });
+        return res.status(200).send(book);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+module.exports.updateBook = async(req,res) => {
+    try {
+        const { book_id } = req.params;
+        const { 
+            title,
+            authors,
+            publishedDate,
+            description,
+            industryIdentifiers,
+            pageCount,
+            printType,
+            maturityRating,
+        } = req.body;
+        const book = await mongodb_client.collection("books").updateOne({ id: book_id }, {
+            $set: {
+                volumeInfo: {
+                    title: title || null,
+                    authors: authors || [],
+                    publishedDate: publishedDate || null,
+                    description: description || null,
+                    industryIdentifiers: industryIdentifiers || [],
+                    pageCount: pageCount || null,
+                    printType: printType || null,
+                    maturityRating: maturityRating || "NOT_MATURE",
+                }
+            }
+        });
+        return res.status(200).send(book);
     } catch (error) {
         console.log(error)
         return res.status(500).send({

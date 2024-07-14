@@ -107,7 +107,7 @@ const createUser = async(req) => {
     let flag = 0;
     let user = null;
     try {
-        const { email } = req.body;
+        const { email, role } = req.body;
         user = await firebase_admin.auth().createUser({
             displayName: "Unknown",
             email,
@@ -125,6 +125,18 @@ const createUser = async(req) => {
         if (user_data) flag += 1;
         logger.debug(`[User-Controller] Account created with id:${user.uid}`)
         const login_token = await firebase_admin.auth().createCustomToken(user.uid);
+
+
+        const workspace_id = 1
+
+        const claims = firebase_admin.auth().getUser(user.uid).customClaims;
+        
+        await firebase_admin.auth().setCustomUserClaims(user.uid,{
+            workspace :{
+                ...claims?.workspace,
+                [workspace_id]: role
+            }
+        })
 
         // //Login the user and set the idToken and refreshToken in the cookies
         
@@ -144,6 +156,7 @@ const createUser = async(req) => {
         if (user_login_data.error) {
             throw new Error(user_login_data.error.message);
         }
+
 
         return {
             message: "User created successfully",

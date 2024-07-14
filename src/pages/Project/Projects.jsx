@@ -117,7 +117,7 @@ const people = [
       },
       "imageLinks": {
         "smallThumbnail": null,
-        "thumbnail": null
+        "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/23/Where_the_Crawdads_Sing_%28film%29.jpg"
       },
       "language": "en",
       "previewLink": null,

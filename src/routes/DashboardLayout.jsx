@@ -44,8 +44,8 @@ const navigation = [
 ];
 const sidebarNavigation = [
   { name: "Home", href: "/", icon: HomeIcon, current: true },
-  { name: "Projects", href: "/project", icon: FolderOpenIcon, current: false },
-  { name: "Customers", href: "#", icon: UserCircleIcon, current: false },
+  { name: "Projects", href: "/books", icon: FolderOpenIcon, current: false },
+  { name: "Customers", href: "/form", icon: UserCircleIcon, current: false },
   { name: "Flagged", href: "#", icon: FlagIcon, current: false },
   { name: "Spam", href: "#", icon: NoSymbolIcon, current: false },
   { name: "Drafts", href: "#", icon: PencilSquareIcon, current: false },

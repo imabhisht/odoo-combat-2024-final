@@ -234,9 +234,9 @@ const BookForm = () => {
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div className="space-y-6 sm:space-y-5">
           <div>
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Register New Book</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
-              This information will be displayed publicly so be careful what you share.
+              Librarian adds the book details here.
             </p>
           </div>
 

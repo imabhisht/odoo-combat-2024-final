@@ -15,6 +15,7 @@
     "@heroicons/react": "^2.1.5",
     "@hookstate/core": "^4.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.13",
     "axios": "^1.6.7",
     "destack": "^2.1.4",
     "dotenv": "^16.4.5",

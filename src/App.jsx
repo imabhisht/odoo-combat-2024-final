@@ -15,6 +15,7 @@ import ProjectOutputPage from "./pages/Project/Output";
 
 // Components
 import LoadingSpinner from "./components/Loading";
+import BookForm from "./pages/form/BookForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,7 +61,12 @@ const router = createBrowserRouter([
         <ProjectOutputPage />
       </ProtectedRoute>
     )
-  
+  },
+  {
+    path:"/form",
+    element: (
+      <BookForm />
+    )
   }
 ]);
 

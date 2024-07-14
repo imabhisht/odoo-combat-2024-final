@@ -1,0 +1,92 @@
+{
+    "step-1": {
+        "data":{
+            "title": "What you want to build?",
+            "options": [
+                { "id": "step_1_portfolio", "title": "Portfolio", "key": "build_type" , "value": "portfolio" }
+            ]
+        }
+    },
+    "step-2": {
+        "data": [
+            {
+                "parent": "step_1_portfolio",
+                "title": "What you want to showcase?",
+                "options": [
+                    { "id": "step_2_portfolio_personal", "title": "Personal", "key": "build_detail", "value": "personal" },
+                    { "id": "step_2_portfolio_development", "title": "Development", "key": "build_detail", "value": "development"}
+                ]
+            }
+        ]
+    },
+    "step-3": {
+        "data": [
+            {
+                "parent": "step_2_portfolio_personal",
+                "title": "What you want to showcase?",
+                "options": [
+                    { "id": "step_3_portfolio_personal_resume", "title": "Resume", "key": "showcase", "value":"resume_showcase" },
+                    { "id": "step_3_portfolio_personal_blog", "title": "Blog", "key": "showcase", "value":"blog_showcase" }
+                ]
+            },
+            {
+                "parent": "step_2_portfolio_development",
+                "title": "What you want to showcase?",
+                "options": [
+                    { "id": "step_3_portfolio_development", "title": "Full Stack Engineer" , "key":"showcase", "value":"full_stack" },
+                    { "id": "step_3_portfolio_development", "title": "AI ML Engineer" , "key":"showcase", "value":"ai_ml"},
+                    { "id": "step_3_portfolio_development", "title": "Data Engineer" , "key":"showcase", "value":"data_engineer"},
+                    { "id": "step_3_portfolio_development", "title": "Frontend Engineer" , "key":"showcase", "value":"frontend_engineer"},
+                    { "id": "step_3_portfolio_development", "title": "Backend Engineer" , "key":"showcase", "value":"backend_engineer"}
+                ]
+            }
+        ]
+    },
+    "step-4": {
+        "data": [
+            {
+                "parent": "step_3_portfolio_development",
+                "title": "Lets connect your social profiles",   
+                "options":[
+                    {"id": "step_4_portfolio_development", "title": "Github" , "placeholder": "Github Profile...", "key":"social", "value": "github"},
+                    {"id": "step_4_portfolio_development", "title": "Linkedin", "placeholder": "Linkedin Profile...", "key":"social", "value": "linkedin"},
+                    {"id": "step_4_portfolio_development", "title": "Medium", "placeholder": "Medium Profile...", "key":"social", "value": "medium"},
+                    {"id": "step_4_portfolio_development", "title": "Twitter", "placeholder": "Twitter Profile...", "key":"social", "value": "twitter"},
+                    {"id": "step_4_portfolio_development", "title": "Resume", "placeholder": "Resume Profile...", "key":"social", "value": "resume"}
+                ]
+            },
+            {
+                "parent": "dummy",
+                "options":[
+                    {"id": "step_4_portfolio_development_github", "title": "Github"},
+                    {"id": "step_4_portfolio_development_linkedin", "title": "Linkedin"},
+                    {"id": "step_4_portfolio_development_medium", "title": "Medium"},
+                    {"id": "step_4_portfolio_development_stackoverflow", "title": "Stackoverflow"},
+                    {"id": "step_4_portfolio_development_stackoverflow", "title": "Stackoverflow", "placeholder": "Stackoverflow Profile..."},
+                    {"id": "step_4_portfolio_development_twitter", "title": "Twitter"},
+                    {"id": "step_4_portfolio_development_facebook", "title": "Facebook"},
+                    {"id": "step_4_portfolio_development_instagram", "title": "Instagram"},
+                    {"id": "step_4_portfolio_development_youtube", "title": "Youtube"},
+                    {"id": "step_4_portfolio_development_blog", "title": "Blog"},
+                    {"id": "step_4_portfolio_development_resume", "title": "Resume"},
+                    {"id": "step_4_portfolio_development_facebook", "title": "Facebook", "placeholder": "Facebook Profile..."},
+                    {"id": "step_4_portfolio_development_instagram", "title": "Instagram", "placeholder": "Instagram Profile..."},
+                    {"id": "step_4_portfolio_development_youtube", "title": "Youtube", "placeholder": "Youtube Profile..."},
+                    {"id": "step_4_portfolio_development_blog", "title": "Blog", "placeholder": "Blog Profile..."}
+                ]
+
+            }
+        ]
+    },
+    "step-5":{
+        "data":[
+            {
+                "parent": "step_4_portfolio_development",
+                "title": "Tell me about yourself",
+                "options":[
+                    {"id": "step_5_portfolio_development","key":"about_self", "title": "About", "placeholder": "Write about yourself..."}
+                ]
+            }
+        ]
+    }
+}

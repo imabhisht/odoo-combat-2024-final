@@ -8,15 +8,14 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPasswor
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "buildify-ai.firebaseapp.com",
-  projectId: "buildify-ai",
-  storageBucket: "buildify-ai.appspot.com",
-  messagingSenderId: "51882905310",
-  appId: "1:51882905310:web:8ec3fab2874282b2587c4f",
-  measurementId: "G-4V34Y3P9LK"
+  apiKey: "AIzaSyCU0v8cXPk3GLhxt6kY3H9_nwDRfXL_C9I",
+  authDomain: "educacy-io.firebaseapp.com",
+  projectId: "educacy-io",
+  storageBucket: "educacy-io.appspot.com",
+  messagingSenderId: "934551118642",
+  appId: "1:934551118642:web:dfa749db50b33ec9ad6d2b",
+  measurementId: "G-RRN7J45S1Y"
 };
-
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

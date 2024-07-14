@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {auth} from "../../init/firebase";
 import { signInWithCustomToken } from "firebase/auth";
-
+import { config } from 'dotenv';
 const requestLoginOTP = async (event) => {
     return axios.post('/user/login', {
         email: event.email,
@@ -27,6 +27,38 @@ const verifyLoginOTP = async (event) => {
 
 }
 
+const addUser = async (event) => {
+    return axios.post('/user/create-admin', {
+        email: event.email,
+        role: event.role
+    },{
+        headers: {
+            'Authorization': 'Bearer ' + await auth.currentUser.getIdToken()
+        }
+    
+    }
+).then((response) => {  
+        return response.data;
+    }).catch((error) => {
+        console.log("Error: ", error)
+        return error;
+    })
+}
+
+const fetchUsers = async () => {
+    return axios.get(`/user/all?workspace_id=1`, {
+        headers: {
+            'Authorization': 'Bearer ' + await auth.currentUser.getIdToken()
+        }
+    }).then((response) => {
+        return response.data;
+    }).catch((error) => {
+        console.log("Error: ", error)
+        return error;
+    }) 
+}
+
+
 
 const loginUsingFirebaseToken = async (event) => {
     try {
@@ -45,6 +77,8 @@ export default {
     requestLoginOTP: requestLoginOTP,
     verifyLoginOTP: verifyLoginOTP,
     loginUsingFirebaseToken,
+    addUser: addUser,
+    fetchUsers: fetchUsers
 }
 
 

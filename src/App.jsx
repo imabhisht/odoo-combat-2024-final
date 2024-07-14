@@ -12,6 +12,7 @@ import ProjectPage from "./pages/Project/Projects";
 import LoginPage from "./pages/Auth/Login";
 import CreateProjectsPage from "./pages/Project/CreateProjects";
 import ProjectOutputPage from "./pages/Project/Output";
+import UsersList from "./pages/Project/UsersList";
 
 // Components
 import LoadingSpinner from "./components/Loading";
@@ -22,14 +23,19 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { path: "/", element: (
-        // <ProtectedRoute>
+        <ProtectedRoute>
           <HomePage />
-        // </ProtectedRoute>
+       </ProtectedRoute>
       )},
       { path: "/books", element: (
         //<ProtectedRoute>
           <ProjectPage />
         //</ProtectedRoute>
+      )},
+      { path: "/users-list", element: (
+        <ProtectedRoute>
+          <UsersList />
+        </ProtectedRoute>
       )},
     ],
   },

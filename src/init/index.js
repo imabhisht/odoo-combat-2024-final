@@ -22,5 +22,6 @@ module.exports = {
     // })
 
     mongodb_client: mongodb_client.client,
-    kafka
+    kafka,
+    elasticSearch: require("./elastic")
 }

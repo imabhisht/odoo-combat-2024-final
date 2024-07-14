@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@elastic/elasticsearch':
+        specifier: ^8.14.0
+        version: 8.14.0
       '@google/generative-ai':
         specifier: ^0.5.0
         version: 0.5.0
@@ -63,6 +66,14 @@ packages:
 
   '@dabh/diagnostics@2.0.3':
     resolution: {integrity: sha512-hrlQOIi7hAfzsMqlGSFyVucrx38O+j6wiGOf//H2ecvIEqYN4ADBSS2iLMh5UFyDunCNniUIPk/q3riFv45xRA==}
+
+  '@elastic/elasticsearch@8.14.0':
+    resolution: {integrity: sha512-MGrgCI4y+Ozssf5Q2IkVJlqt5bUMnKIICG2qxeOfrJNrVugMCBCAQypyesmSSocAtNm8IX3LxfJ3jQlFHmKe2w==}
+    engines: {node: '>=18'}
+
+  '@elastic/transport@8.7.0':
+    resolution: {integrity: sha512-IqXT7a8DZPJtqP2qmX1I2QKmxYyN27kvSW4g6pInESE1SuGwZDp2FxHJ6W2kwmYOJwQdAt+2aWwzXO5jHo9l4A==}
+    engines: {node: '>=18'}
 
   '@fastify/busboy@1.2.1':
     resolution: {integrity: sha512-7PQA7EH43S0CxcOa9OeAnaeA0oQ+e/DHNPZwSQM9CQHW76jle5+OvLdibRp/Aafs9KXbLhxyjOTkRjWUbQEd3Q==}
@@ -130,6 +141,10 @@ packages:
 
   '@mongodb-js/saslprep@1.1.5':
     resolution: {integrity: sha512-XLNOMH66KhJzUJNwT/qlMnS4WsNDWD5ASdyaSH3EtK+F4r/CFGa3jT4GNi4mfOitGvWXtdLgQJkQjxSVrio+jA==}
+
+  '@opentelemetry/api@1.9.0':
+    resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
+    engines: {node: '>=8.0.0'}
 
   '@prisma/client@5.10.2':
     resolution: {integrity: sha512-ef49hzB2yJZCvM5gFHMxSFL9KYrIP9udpT5rYo0CsHD4P9IKj473MbhU1gjKKftiwWBTIyrt9jukprzZXazyag==}
@@ -604,6 +619,10 @@ packages:
     resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
     engines: {node: '>= 0.4'}
 
+  hpagent@1.2.0:
+    resolution: {integrity: sha512-A91dYTeIB6NoXG+PxTQpCCDDnfHsW9kc06Lvpu1TEe9gnd6ZFeiBoRO9JvzEv6xK7EX97/dUE8g/vBMTqTS3CA==}
+    engines: {node: '>=14'}
+
   http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
@@ -953,6 +972,9 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  secure-json-parse@2.7.0:
+    resolution: {integrity: sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw==}
+
   semver@7.6.0:
     resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}
     engines: {node: '>=10'}
@@ -1067,6 +1089,10 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
+  undici@6.19.2:
+    resolution: {integrity: sha512-JfjKqIauur3Q6biAtHJ564e3bWa8VvT+7cSiOJHFbX4Erv6CLGDpg8z+Fmg/1OI/47RA+GI2QZaF48SSaLvyBA==}
+    engines: {node: '>=18.17'}
+
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
@@ -1162,6 +1188,25 @@ snapshots:
       colorspace: 1.1.4
       enabled: 2.0.0
       kuler: 2.0.0
+
+  '@elastic/elasticsearch@8.14.0':
+    dependencies:
+      '@elastic/transport': 8.7.0
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@elastic/transport@8.7.0':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      debug: 4.3.4(supports-color@5.5.0)
+      hpagent: 1.2.0
+      ms: 2.1.3
+      secure-json-parse: 2.7.0
+      tslib: 2.6.2
+      undici: 6.19.2
+    transitivePeerDependencies:
+      - supports-color
 
   '@fastify/busboy@1.2.1':
     dependencies:
@@ -1276,6 +1321,8 @@ snapshots:
   '@mongodb-js/saslprep@1.1.5':
     dependencies:
       sparse-bitfield: 3.0.3
+
+  '@opentelemetry/api@1.9.0': {}
 
   '@prisma/client@5.10.2(prisma@5.10.2)':
     optionalDependencies:
@@ -1873,6 +1920,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  hpagent@1.2.0: {}
+
   http-errors@2.0.0:
     dependencies:
       depd: 2.0.0
@@ -2223,6 +2272,8 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
+  secure-json-parse@2.7.0: {}
+
   semver@7.6.0:
     dependencies:
       lru-cache: 6.0.0
@@ -2367,6 +2418,8 @@ snapshots:
   undefsafe@2.0.5: {}
 
   undici-types@5.26.5: {}
+
+  undici@6.19.2: {}
 
   unpipe@1.0.0: {}
 

@@ -5,8 +5,8 @@ const kafka = new Kafka({
   ssl: true,
   sasl: {
       mechanism: 'scram-sha-256',
-      username: 'c3RpcnJpbmctZ2xvd3dvcm0tMTQ1MjUkWJdZ3fp4ZbaolYMY44717qiaCz0N5sw',
-      password: 'ZThmZmFiMWEtYzU0Mi00MzQ1LWE5MmMtY2ViNzBjMzljNDc0'
+      username: process.env.KAFKA_USERNAME,
+      password: process.env.KAFKA_PASSWORD,
   },
   logLevel: logLevel.ERROR,
 });

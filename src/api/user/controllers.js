@@ -130,6 +130,8 @@ const createUser = async(req) => {
         const workspace_id = 1
 
         const claims = firebase_admin.auth().getUser(user.uid).customClaims;
+
+
         
         await firebase_admin.auth().setCustomUserClaims(user.uid,{
             workspace :{
@@ -157,6 +159,12 @@ const createUser = async(req) => {
             throw new Error(user_login_data.error.message);
         }
 
+        await mongodb_client.collection("user_workspace").insertOne({
+            user: user,
+            workspace_id: workspace_id,
+            role: role
+        })
+
 
         return {
             message: "User created successfully",
@@ -180,7 +188,62 @@ const createUser = async(req) => {
     }
 }
 
+module.exports.createUserByAdmin = async(req,res) => {
+    try {
+        const { email, role } = req.body;
 
+        const workspace_id = 1
+
+        const user = await firebase_admin.auth().createUser({
+            displayName: "Unknown",
+            email,
+        })
+
+        await firebase_admin.auth().setCustomUserClaims(user.uid,{
+            workspace :{
+                ["1"]: role
+            }});
+
+
+        const user_data = await prisma.user.create({
+            data: {
+                id: user.uid,
+                name: "Unkonwn",
+                email: email
+            }
+        });
+
+        await mongodb_client.collection("user_workspace").insertOne({
+            user: user,
+            workspace_id: workspace_id,
+            role: role
+        })
+
+        
+        return res.send(user)
+    } catch (error) {
+        return res.status(500).send({message: error.message})
+    }
+
+}
+
+
+
+module.exports.getUsers = async(req,res) => {
+    try {
+        const { workspace_id } = req.query;
+        const users = await mongodb_client.collection("user_workspace").find({
+            workspace_id: parseInt(workspace_id)
+        }).toArray();  
+
+        console.log(users)
+        return res.send(users);
+    } catch (error) {
+        logger.debug(`[User-Controller] Users not fetched with reason: ${error.message}`)
+        return res.status(500).send({message: error.message})
+    }
+
+}
 const login = async(req) => {
     try {
         const { email } = req.body;

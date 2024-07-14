@@ -346,17 +346,19 @@ module.exports.getRetunedBooks = async(req,res) => {
 module.exports.borrowBook = async(req,res) => {
     try {
         const { book_id } = req.params;
-        const { user_id } = req.auth_id;
+        const { user_id } = req.auth;
         const { due_at, email_id, price, workspace_id } = req.body;
-        const { workspace } = req.auth;
+        // const { workspace } = req.auth;
+        // const  workspace  = req.auth.workspace;
 
         // Check if workspace_id key exists in the user's workspace
-        if (!workspace.includes(workspace_id)) {
-            return res.status(400).send({
-                message: "Invalid workspace"
-            })
-        }
+        // if (!workspace.includes(workspace_id)) {
+        //     return res.status(400).send({
+        //         message: "Invalid workspace"
+        //     })
+        // }
 
+        console.log(email_id)
         const client_user = await firebase_admin.auth().getUserByEmail(email_id);
 
         if (!client_user) {
@@ -379,12 +381,14 @@ module.exports.borrowBook = async(req,res) => {
         // Add the book to the user's borrowed list
         const borrowed_book = await mongodb_client.collection("borrowed_books").insertOne({
             book_id: book_id,
-            due_at: due_at,
+            due_at: new Date(due_at),
             email_id: email_id,
             price: price,
             status: "BORROWED",
             workspace_id: workspace_id,
             borrow_at: new Date(),
+            id: uuid.v4()
+
         });
 
         return res.status(200).send(borrowed_book);
@@ -398,20 +402,14 @@ module.exports.borrowBook = async(req,res) => {
 
 module.exports.returnBook = async(req,res) => {
     try {
-        const { book_id } = req.params;
-        const { user_id } = req.auth_id;
-        const { workspace_id, email_id } = req.body;
+        const { borrow_id } = req.params;
+        const { user_id } = req.auth;
+        const { workspace_id, email_id, book_id } = req.body;
 
-        // Check if workspace_id key exists in the user's workspace
-        if (!workspace.includes(workspace_id)) {
-            return res.status(400).send({
-                message: "Invalid workspace"
-            })
-        }
 
         // Check if the user has borrowed the book
         const borrowed_book = await mongodb_client.collection("borrowed_books").findOne({ 
-            book_id: book_id,
+            id: borrow_id,
             email_id: email_id,
             status: "BORROWED",
          });
@@ -422,12 +420,15 @@ module.exports.returnBook = async(req,res) => {
             }
         )}
 
+        const realbook = await mongodb_client.collection("books").findOne({ id: book_id });
+        console.log(realbook)
+
         // Update the book available_count
         await mongodb_client.collection("books").updateOne({ id: book_id }, { $inc: { available_count: 1 } });
 
         // Update the borrowed book status
         await mongodb_client.collection("borrowed_books").updateOne({ 
-            book_id: book_id,
+            book_id: borrowed_book.book_id,
             email_id: email_id,
          }, { $set: { status: "RETURNED" } });
 

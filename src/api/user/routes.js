@@ -11,10 +11,12 @@ router.get("/",(req,res) => {
 
 router.delete("/account", verifyAccessToken ,userController.deleteUser);
 
-
+router.post("/create-admin", verifyAccessToken ,userController.createUserByAdmin);
 
 router.post("/login", userController.singleLogin);
 
 router.post("/token/refresh", userController.refreshToken);
+
+router.get("/all", verifyAccessToken ,userController.getUsers);
 
 module.exports = router;

@@ -126,7 +126,7 @@ const createUser = async(req) => {
         logger.debug(`[User-Controller] Account created with id:${user.uid}`)
         const login_token = await firebase_admin.auth().createCustomToken(user.uid);
 
-        //Login the user and set the idToken and refreshToken in the cookies
+        // //Login the user and set the idToken and refreshToken in the cookies
         
         const user_login = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`, {
             method: 'POST',
@@ -208,7 +208,7 @@ const login = async(req) => {
     };
 
     } catch (error) {
-        logger.debug(`[User-Controller] Account not logged in with reason: ${error.message}`)
+        logger.debug(`[User-Controller] Account not logged in with reasonx: ${error.message}`)
         throw error;
     }
 }
